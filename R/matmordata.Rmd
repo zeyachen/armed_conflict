@@ -1,0 +1,35 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(here)
+library(tidyverse)
+here()
+rdf <- read.csv(here("original","maternalmortality.csv"),header = T,sep = )
+```
+
+a. Use the select() function in the dplyr package (which is one of the packages in
+the tidyverse bundle) to subset the data to have only the variables Country.Name,
+X2000 – X2019.
+```{r}
+sdf <- select(rdf,c(Country.Name,X2000:X2019))
+```
+
+b. The data set is currently in a wide format. Use the pivot_longer() function to
+convert the data set into a long format. So that the first and last 20 rows of the
+resulting data set look like this. Hint: You need to select the columns X2000 to
+X2019, remove the prefix X from them, change the name of the variable to
+Year, change the values to MatMor. Finally, make sure the year variable is stored
+as numeric.
+```{r}
+names(sdf) <- c("Country.Name",2000:2019)
+ldf <- pivot_longer(sdf, cols = c(2:21),names_to = "year",values_to = "MatMor")
+```
+ 
+```{r}
+write_csv(ldf,here("data","MatMor.csv"))
+```
+
