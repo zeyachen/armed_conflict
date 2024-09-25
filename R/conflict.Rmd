@@ -1,0 +1,24 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(here)
+library(tidyverse)
+rdf <- read.csv(here("original","conflictdata.csv"),header = T)
+```
+
+```{r}
+ndf <- rdf %>%
+  group_by(ISO, year) %>%
+  summarise(total_best = sum(best, na.rm = TRUE)) %>%
+  ungroup()
+```
+```{r}
+ndf$conflict <- 1*(ndf$total_best>=25)
+ndf$year <- ndf$year + 1
+ndf <- ndf[,-3]
+```
+

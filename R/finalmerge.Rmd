@@ -1,0 +1,30 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+covariates <- read_csv("original/covariates.csv")
+```
+
+```{r}
+worldbank <- worldbank[!is.na(worldbank$ISO),]
+final <- merge(worldbank,ndf,by= c("ISO","year"),all.x = T)
+```
+
+```{r}
+final <- merge(final,disastor,by= c("ISO","year"),all.x = T)
+final <- merge(final,covariates[,-1],by= c("ISO","year"),all.x = T)
+```
+
+```{r}
+all(table(final$ISO)==20) #check if its 20 for all countries
+```
+
+
+```{r}
+library(here)
+write_csv(final,here("data","final.csv"))
+```
+
