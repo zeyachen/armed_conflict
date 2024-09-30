@@ -5,8 +5,18 @@ output: html_notebook
 
 
 ```{r}
-covariates <- read_csv("original/covariates.csv")
+library(tidyverse)
+library(here)
+here()
+covariates <- read_csv(here("original","covariates.csv"))
 ```
+
+```{r}
+source(here("R", "matmordata.R"))
+source(here("R", "disasterdata.R"))
+source(here("R", "conflict.R"))
+```
+
 
 ```{r}
 worldbank <- worldbank[!is.na(worldbank$ISO),]
@@ -14,8 +24,8 @@ final <- merge(worldbank,ndf,by= c("ISO","year"),all.x = T)
 ```
 
 ```{r}
-final <- merge(final,disastor,by= c("ISO","year"),all.x = T)
-final <- merge(final,covariates[,-1],by= c("ISO","year"),all.x = T)
+final <- merge(final,disasters,by= c("ISO","year"),all.x = T)
+final <- merge(final,covariates[,-1],by= c("ISO","year"),all.y = T)
 ```
 
 ```{r}
