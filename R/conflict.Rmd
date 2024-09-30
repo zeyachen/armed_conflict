@@ -19,6 +19,5 @@ ndf <- rdf %>%
 ```{r}
 ndf$conflict <- 1*(ndf$total_best>=25)
 ndf$year <- ndf$year + 1
-ndf <- ndf[,-3]
 ```
 

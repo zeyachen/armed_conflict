@@ -1754,10 +1754,23 @@ display: none;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShoZXJlKVxubGlicmFyeSh0aWR5dmVyc2UpXG5yZGYgPC0gcmVhZC5jc3YoaGVyZShcIm9yaWdpbmFsXCIsXCJjb25mbGljdGRhdGEuY3N2XCIpLGhlYWRlciA9IFQpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShoZXJlKVxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
 <pre class="r"><code>library(here)
-library(tidyverse)
-rdf &lt;- read.csv(here(&quot;original&quot;,&quot;conflictdata.csv&quot;),header = T)</code></pre>
+library(tidyverse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEF0dGFjaGluZyBjb3JlIHRpZHl2ZXJzZSBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDIuMC4wIOKUgOKUgFxu4pyUIGRwbHlyICAgICAxLjEuNCAgICAg4pyUIHJlYWRyICAgICAyLjEuNVxu4pyUIGZvcmNhdHMgICAxLjAuMCAgICAg4pyUIHN0cmluZ3IgICAxLjUuMVxu4pyUIGdncGxvdDIgICAzLjQuNCAgICAg4pyUIHRpYmJsZSAgICAzLjIuMVxu4pyUIGx1YnJpZGF0ZSAxLjkuMyAgICAg4pyUIHRpZHlyICAgICAxLjMuMVxu4pyUIHB1cnJyICAgICAxLjAuMiAgICAg4pSA4pSAIENvbmZsaWN0cyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlX2NvbmZsaWN0cygpIOKUgOKUgFxu4pyWIGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbuKcliBkcGx5cjo6bGFnKCkgICAgbWFza3Mgc3RhdHM6OmxhZygpXG7ihLkgVXNlIHRoZSBcdTAwMWJdODs7aHR0cDovL2NvbmZsaWN0ZWQuci1saWIub3JnL1x1MDAwN2NvbmZsaWN0ZWQgcGFja2FnZVx1MDAxYl04OztcdTAwMDcgdG8gZm9yY2UgYWxsIGNvbmZsaWN0cyB0byBiZWNvbWUgZXJyb3JzXG4ifQ== -->
+<pre><code>── Attaching core tidyverse packages ──────────────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmRmIDwtIHJlYWQuY3N2KGhlcmUoXCJvcmlnaW5hbFwiLFwiY29uZmxpY3RkYXRhLmNzdlwiKSxoZWFkZXIgPSBUKVxuYGBgIn0= -->
+<pre class="r"><code>rdf &lt;- read.csv(here(&quot;original&quot;,&quot;conflictdata.csv&quot;),header = T)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1774,14 +1787,16 @@ rdf &lt;- read.csv(here(&quot;original&quot;,&quot;conflictdata.csv&quot;),heade
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmRmJGNvbmZsaWN0IDwtIDEqKG5kZiR0b3RhbF9iZXN0Pj0yNSlcbmBgYCJ9 -->
-<pre class="r"><code>ndf$conflict &lt;- 1*(ndf$total_best&gt;=25)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmRmJGNvbmZsaWN0IDwtIDEqKG5kZiR0b3RhbF9iZXN0Pj0yNSlcbm5kZiR5ZWFyIDwtIG5kZiR5ZWFyICsgMVxubmRmIDwtIG5kZlssLTNdXG5gYGAifQ== -->
+<pre class="r"><code>ndf$conflict &lt;- 1*(ndf$total_best&gt;=25)
+ndf$year &lt;- ndf$year + 1
+ndf &lt;- ndf[,-3]</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCmBgYHtyfQpsaWJyYXJ5KGhlcmUpCmxpYnJhcnkodGlkeXZlcnNlKQpyZGYgPC0gcmVhZC5jc3YoaGVyZSgib3JpZ2luYWwiLCJjb25mbGljdGRhdGEuY3N2IiksaGVhZGVyID0gVCkKYGBgCgpgYGB7cn0KbmRmIDwtIHJkZiAlPiUKICBncm91cF9ieShJU08sIHllYXIpICU+JQogIHN1bW1hcmlzZSh0b3RhbF9iZXN0ID0gc3VtKGJlc3QsIG5hLnJtID0gVFJVRSkpICU+JQogIHVuZ3JvdXAoKQpgYGAKYGBge3J9Cm5kZiRjb25mbGljdCA8LSAxKihuZGYkdG90YWxfYmVzdD49MjUpCm5kZiR5ZWFyIDwtIG5kZiR5ZWFyICsgMQpuZGYgPC0gbmRmWywtM10KYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCmBgYHtyfQpsaWJyYXJ5KGhlcmUpCmxpYnJhcnkodGlkeXZlcnNlKQpyZGYgPC0gcmVhZC5jc3YoaGVyZSgib3JpZ2luYWwiLCJjb25mbGljdGRhdGEuY3N2IiksaGVhZGVyID0gVCkKYGBgCgpgYGB7cn0KbmRmIDwtIHJkZiAlPiUKICBncm91cF9ieShJU08sIHllYXIpICU+JQogIHN1bW1hcmlzZSh0b3RhbF9iZXN0ID0gc3VtKGJlc3QsIG5hLnJtID0gVFJVRSkpICU+JQogIHVuZ3JvdXAoKQpgYGAKYGBge3J9Cm5kZiRjb25mbGljdCA8LSAxKihuZGYkdG90YWxfYmVzdD49MjUpCm5kZiR5ZWFyIDwtIG5kZiR5ZWFyICsgMQpgYGAKCg==</div>
 
 
 

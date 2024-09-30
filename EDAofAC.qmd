@@ -1,0 +1,89 @@
+---
+title: "EDA of Armed Conflict"
+format: pdf
+editor: visual
+author: Desmond Chen
+---
+
+```{r}
+library(here)
+library(tidyverse)
+finaldata <- read.csv(here("data", "finaldata.csv"), header = TRUE)
+names(finaldata)
+```
+```{r}
+finaldata$earthquake[is.na(finaldata$earthquake)] <- 0
+finaldata$drought[is.na(finaldata$drought)] <- 0
+```
+
+```{r}
+finaldata %>%
+  dplyr::filter(Country.Name == "Canada")
+```
+```{r}
+summary(finaldata)
+```
+Maternal mortalities is the outcome with the most missingness of 426, followed by gdp with a missing count of 62. There seems to be a country that was not included in the covariates data, hence we see a missing count of 20 across several covariates.
+
+```{r}
+library(ggplot2)
+ggplot(data.frame(finaldata$total_best), aes(x = finaldata$total_best)) +
+  geom_histogram() +
+  scale_y_log10() +
+  labs(title = "Histogram of total death with Log Y-axis",
+       x = "Death",
+       y = "Count (log scale)") +
+  theme_minimal()
+```
+We see a lot outliers at around 55000 death, these could be caused by war happening at certain region.
+
+```{r}
+library(ggplot2)
+ggplot(data.frame(finaldata$MatMor), aes(x = finaldata$MatMor)) +
+  geom_histogram() +
+  scale_y_log10() +
+  labs(title = "Histogram of maternal mortality with Log Y-axis",
+       x = "Death",
+       y = "Count (log scale)") +
+  theme_minimal()
+```
+Maternal mortality looks fine, and not any outliers.
+```{r}
+library(ggplot2)
+ggplot(data.frame(finaldata$InfMor), aes(x = finaldata$InfMor)) +
+  geom_histogram() +
+  scale_y_log10() +
+  labs(title = "Histogram of maternal mortality with Log Y-axis",
+       x = "Death",
+       y = "Count (log scale)") +
+  theme_minimal()
+```
+
+Infant mortalities looks fine as well.
+
+```{r}
+library(ggplot2)
+ggplot(data.frame(finaldata$NeoMor), aes(x = finaldata$NeoMor)) +
+  geom_histogram() +
+  scale_y_log10() +
+  labs(title = "Histogram of maternal mortality with Log Y-axis",
+       x = "Death",
+       y = "Count (log scale)") +
+  theme_minimal()
+```
+
+```{r}
+library(ggplot2)
+ggplot(data.frame(finaldata$U5Mor), aes(x = finaldata$U5Mor)) +
+  geom_histogram() +
+  scale_y_log10() +
+  labs(title = "Histogram of maternal mortality with Log Y-axis",
+       x = "Death",
+       y = "Count (log scale)") +
+  theme_minimal()
+```
+
+```{r}
+cor(finaldata[,c(4:7)], use = "complete.obs")
+```
+We can see the main outcomes are highly correlated, so we need to be cautious when running them one by one.

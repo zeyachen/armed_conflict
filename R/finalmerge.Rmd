@@ -35,6 +35,6 @@ all(table(final$ISO)==20) #check if its 20 for all countries
 
 ```{r}
 library(here)
-write_csv(final,here("data","final.csv"))
+write_csv(final,here("data","finaldata.csv"))
 ```
 
