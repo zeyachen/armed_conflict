@@ -1,0 +1,40 @@
+---
+title: "figure1"
+author: "Desmond Chen"
+format: pdf
+editor: visual
+---
+
+```{r}
+library(here)
+library(tidyverse)
+finaldata <- read.csv(here("data", "finaldata.csv"), header = TRUE)
+finaldata$earthquake[is.na(finaldata$earthquake)] <- 0
+finaldata$drought[is.na(finaldata$drought)] <- 0
+finaldata$conflict <- as.factor(finaldata$conflict)
+finaldata$drought <- as.factor(finaldata$drought)
+finaldata$earthquake <- as.factor(finaldata$earthquake)
+finaldata$OECD <- as.factor(finaldata$OECD)
+finaldata$conflict <- ifelse(finaldata$conflict == 1, "Conflict", "No Conflict")
+```
+```{r}
+f1d <- finaldata |>
+  dplyr::select(Country.Name, ISO, year, MatMor) |>
+  dplyr::filter(year < 2018) |>
+  arrange(ISO, year) |>
+  group_by(ISO) |>
+  mutate(diffmatmor = MatMor - MatMor[1L]) 
+f1dl <- na.omit(f1d$ISO[f1d$diffmatmor > 0 & f1d$year == 2017])
+```
+
+```{r}
+f1d <- f1d[f1d$ISO %in% f1dl,]
+f1d |>
+  ggplot(aes(x = year, y = MatMor, group = ISO)) +
+  geom_line(aes(color = as.factor(Country.Name)), alpha = 0.5) +
+  xlim(c(2000,2019)) +
+  scale_y_continuous(trans='log10') + 
+  labs(y = "Maternal mortality", x = "Year", color = "Country Name") + 
+  theme_bw()
+```
+

@@ -1,0 +1,63 @@
+---
+title: "table1"
+author: "Desmond Chen"
+format: docx
+editor: visual
+---
+
+```{r}
+library(here)
+library(tidyverse)
+finaldata <- read.csv(here("data", "finaldata.csv"), header = TRUE)
+finaldata$earthquake[is.na(finaldata$earthquake)] <- 0
+finaldata$drought[is.na(finaldata$drought)] <- 0
+```
+
+```{r}
+#summary(finaldata)
+#c("ISO", "year", "Country.Name", "Maternal Mortality", "Infant Mortality", "Neonatal Mortality", "Under 5 Mortality", "Total Estimated Death", "conflict", "Drought", "Earthquake", "Region", "GDP in USD/1000", "OECD", "OECD2023", "Population Density", "Urban Residents Percentage", "Non-working Population Percentage", "Male Education", "Average Temperature", "rainfall in mm dep/1000")
+finaldata$conflict <- as.factor(finaldata$conflict)
+finaldata$drought <- as.factor(finaldata$drought)
+finaldata$earthquake <- as.factor(finaldata$earthquake)
+finaldata$OECD <- as.factor(finaldata$OECD)
+finaldata$conflict <- ifelse(finaldata$conflict == 1, "Conflict", "No Conflict")
+```
+```{r}
+library(gtsummary)
+```
+
+```{r}
+#conflictl ~ "Armed Conflict (Yes=1,No=0)",
+ table1 <- finaldata %>%
+  tbl_summary(
+    by = conflict,
+    include = c(MatMor, InfMor, NeoMor, U5Mor, conflict, total_best, drought, earthquake, gdp1000, OECD, popdens, urban, agedep, male_edu, temp, rainfall1000),
+    label = list(
+      MatMor ~ "Maternal Mortality",
+      InfMor ~ "Infant Mortality",
+      NeoMor ~ "Neonatal Mortality",
+      U5Mor ~ "Under 5 Mortality",
+      total_best ~ "Total Estimated Death",
+      drought ~ "Drought",
+      earthquake ~ "Earthquake",
+      gdp1000 ~ "GDP in USD/1000",
+      OECD ~ 'OECD',
+      popdens ~ 'Population Density',
+      urban ~ 'Urban Residents Percentage',
+      agedep ~ 'Non-working Population Percentage',
+      male_edu ~ 'Male Education',
+      temp ~ 'Average Temperature',
+      rainfall1000 ~ 'Rainfall in mm/1000'
+    ),
+    statistic = list(
+      MatMor ~ "{median} ({p25}, {p75})",
+      InfMor ~ "{median} ({p25}, {p75})",
+      NeoMor ~ "{median} ({p25}, {p75})",
+      U5Mor ~ "{median} ({p25}, {p75})"  # Display median and IQR for hp
+    )
+  ) %>% 
+  add_overall() %>%
+  modify_caption("**Table 1 Summary of Subject Characteristics in Armed Conflict Project**")
+table1
+```
+
