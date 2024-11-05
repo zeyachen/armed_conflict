@@ -6,6 +6,7 @@ output: html_notebook
 ```{r}
 finaldata$loggdp <- log(finaldata$gdp1000)
 finaldata$pctpopdens <- finaldata$popdens / 100
+names(finaldata)[15] <- "armcon"
 ```
 
 ```{r}
@@ -43,22 +44,22 @@ plot(mice.multi.out)
 ```{r}
 # multiple imputation regression results
 fit.matmormod <- with(mice.multi.out,
-                      lm(matmor ~ -1 + armconf1 + loggdp + OECD + 
+                      lm(matmor ~ -1 + armcon + loggdp + OECD + 
                                         pctpopdens + urban + agedep + male_edu + 
                                         temp + rainfall1000 + earthquake + 
                                         drought + as.factor(ISOnum) + as.factor(year)))
 fit.un5mormod <- with(mice.multi.out,
-                      lm(un5mor ~ -1 + armconf1 + loggdp + OECD + 
+                      lm(un5mor ~ -1 + armcon + loggdp + OECD + 
                                         pctpopdens + urban + agedep + male_edu + 
                                         temp + rainfall1000 + earthquake + 
                                         drought + as.factor(ISOnum) + as.factor(year)))
 fit.infmormod <- with(mice.multi.out,
-                      lm(infmor ~ -1 + armconf1 + loggdp + OECD + 
+                      lm(infmor ~ -1 + armcon + loggdp + OECD + 
                                         pctpopdens + urban + agedep + male_edu + 
                                         temp + rainfall1000 + earthquake + 
                                         drought + as.factor(ISOnum) + as.factor(year)))
 fit.neomormod <- with(mice.multi.out,
-                      lm(neomor ~ -1 + armconf1 + loggdp + OECD + 
+                      lm(neomor ~ -1 + armcon + loggdp + OECD + 
                                         pctpopdens + urban + agedep + male_edu + 
                                         temp + rainfall1000 + earthquake + 
                                         drought + as.factor(ISOnum) + as.factor(year)))
@@ -72,7 +73,6 @@ mi.neomormod <- pool(fit.neomormod)
 
 ```{r}
 # complete case regression results
-names(finaldata)[15] <- "armcon"
 preds <- as.formula(" ~ -1 + armcon + loggdp + OECD + pctpopdens + urban + 
                   agedep + male_edu + temp + rainfall1000 + earthquake + drought + 
                   as.factor(ISO) + as.factor(year)")
