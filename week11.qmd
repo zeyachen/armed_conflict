@@ -1,0 +1,67 @@
+---
+title: "Week11"
+format: html
+editor: visual
+---
+
+```{r}
+library(here)
+df <- read.csv(here("data", "finaldata.csv"), header = TRUE)
+df7 <- df[df$year==2017,]
+df7 <- df7[!is.na(df7$infmor),]
+```
+
+```{r}
+library(boot)
+
+getmeddiff <- function(data, indices) {
+  sample_data <- data[indices, ]
+  group_meds <- tapply(sample_data$infmor, sample_data$armcon, FUN = function(x) median(x,na.rm=TRUE))
+  meddiff <- group_meds[2] - group_meds[1]
+  return(meddiff)
+}
+
+bootout <- boot(df7, statistic = getmeddiff, strata = df7$armcon, R = 1000)
+bootout
+```
+
+## Infant Mortality
+
+```{r}
+boot.ci(boot.out = bootout, conf = 0.95, type = c("basic", "perc", "bca"))
+```
+```{r}
+getmeddiff <- function(data, indices) {
+  sample_data <- data[indices, ]
+  group_meds <- tapply(sample_data$neomor, sample_data$armcon, FUN = function(x) median(x,na.rm=TRUE))
+  meddiff <- group_meds[2] - group_meds[1]
+  return(meddiff)
+}
+
+bootout <- boot(df7, statistic = getmeddiff, strata = df7$armcon, R = 1000)
+bootout
+```
+
+## Neonatal Mortality
+
+```{r}
+boot.ci(boot.out = bootout, conf = 0.95, type = c("basic", "perc", "bca"))
+```
+
+## Under 5 Mortality
+
+```{r}
+getmeddiff <- function(data, indices) {
+  sample_data <- data[indices, ]
+  group_meds <- tapply(sample_data$un5mor, sample_data$armcon, FUN = function(x) median(x,na.rm=TRUE))
+  meddiff <- group_meds[2] - group_meds[1]
+  return(meddiff)
+}
+
+bootout <- boot(df7, statistic = getmeddiff, strata = df7$armcon, R = 1000)
+bootout
+```
+
+```{r}
+boot.ci(boot.out = bootout, conf = 0.95, type = c("basic", "perc", "bca"))
+```
