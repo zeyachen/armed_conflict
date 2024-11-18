@@ -30,6 +30,9 @@ bootout
 ```{r}
 boot.ci(boot.out = bootout, conf = 0.95, type = c("basic", "perc", "bca"))
 ```
+Upper bound and lower bound in Basic is higher in Basic, while percentile is on the lower end, finally BCa is right in the middle.
+
+
 ```{r}
 getmeddiff <- function(data, indices) {
   sample_data <- data[indices, ]
@@ -47,6 +50,7 @@ bootout
 ```{r}
 boot.ci(boot.out = bootout, conf = 0.95, type = c("basic", "perc", "bca"))
 ```
+Upper bound and lower bound in Basic is higher in Basic, while percentile and BCa was lower and consistent.
 
 ## Under 5 Mortality
 
@@ -65,3 +69,4 @@ bootout
 ```{r}
 boot.ci(boot.out = bootout, conf = 0.95, type = c("basic", "perc", "bca"))
 ```
+Upper bound and lower bound in Basic is higher in Basic, while percentile is on the lower end, finally BCa is right in the middle.
